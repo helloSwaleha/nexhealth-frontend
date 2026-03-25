@@ -1,0 +1,112 @@
+/* ------------------------------
+   Patient Signup Page Styling
+--------------------------------*/
+
+.PatientSignup-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #3b82f6, #60a5fa);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.PatientSignup-card {
+  background: #ffffff;
+  padding: 40px 30px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.PatientSignup-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #1e3a8a;
+}
+
+/* Input Styles */
+.PatientSignup-input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  border: 2px solid #d1d5db;
+  font-size: 15px;
+  background: #f9fafb;
+  transition: 0.3s ease;
+}
+
+.PatientSignup-input:focus {
+  border-color: #3b82f6;
+  background: #ffffff;
+  box-shadow: 0px 0px 8px rgba(59, 130, 246, 0.3);
+  outline: none;
+}
+
+/* Signup Button */
+.PatientSignup-btn {
+  width: 100%;
+  background: #3b82f6;
+  color: white;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.PatientSignup-btn:hover {
+  background: #2563eb;
+}
+
+/* Login link */
+.PatientSignup-login-text {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 15px;
+}
+
+.PatientSignup-login-text span {
+  color: #2563eb;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.PatientSignup-login-text span:hover {
+  text-decoration: underline;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .PatientSignup-card {
+    padding: 30px 20px;
+  }
+
+  .PatientSignup-title {
+    font-size: 24px;
+  }
+
+  .PatientSignup-btn {
+    font-size: 15px;
+  }
+}
