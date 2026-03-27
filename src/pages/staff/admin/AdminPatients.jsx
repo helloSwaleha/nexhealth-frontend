@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import AdminSidebar from "./AdminSidebar";
 import axios from "axios";
 import { Search, MapPin, Phone, User, Loader2 } from "lucide-react";
-import API_BASE_URL from '../apiConfig';
+import API_BASE_URL from '../../../apiConfig';
 
 export default function AdminPatients() {
   const token = localStorage.getItem("token");

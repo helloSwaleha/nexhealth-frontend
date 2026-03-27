@@ -5,7 +5,7 @@ import {
   CheckCircle2, FileText, ChevronDown, ChevronUp
 } from "lucide-react";
 import axios from "axios";
-import API_BASE_URL from '../apiConfig';
+import API_BASE_URL from '../../apiConfig';
 
 
 export default function Appointments() {

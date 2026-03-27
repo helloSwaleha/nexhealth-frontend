@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, Navigate } from "react-router-dom";
 import { Calendar, FileText, User, Loader2, ChevronRight, Bell } from "lucide-react";
 import axios from "axios";
-import API_BASE_URL from '../apiConfig';
+import API_BASE_URL from '../../apiConfig';
 
 export default function PatientDashboard() {
   const navigate = useNavigate();

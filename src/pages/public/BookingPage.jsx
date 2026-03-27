@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Calendar, Clock, User, CheckCircle, Loader2, ChevronLeft } from "lucide-react";
-import API_BASE_URL from '../apiConfig';
+import API_BASE_URL from '../../apiConfig';
 
 export default function BookingPage() {
   const { clinicId, doctorId } = useParams();

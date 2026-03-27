@@ -1,6 +1,6 @@
 import { Home, Calendar, ClipboardList, FileText, User, LogOut, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import API_BASE_URL from '../apiConfig';
+import API_BASE_URL from '../../apiConfig';
 
 export default function PatientSidebar() {
   const navigate = useNavigate();

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AdminSidebar from "./AdminSidebar";
 import { PlusCircle, Image as ImageIcon, Layout, MapPin, Phone, Mail, Upload, Link as LinkIcon } from "lucide-react";
-import API_BASE_URL from '../apiConfig';
+import API_BASE_URL from '../../../apiConfig';
 
 
 

@@ -3,7 +3,7 @@ import DoctorSidebar from "./DoctorSidebar";
 import { CheckCircle, XCircle, FileText, Loader2, Calendar, Send, X, Clock, Search } from "lucide-react"; // Added Search icon
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import API_BASE_URL from '../apiConfig';
+import API_BASE_URL from "../../../apiConfig";
 
 export default function DoctorAppointments() {
   const navigate = useNavigate();

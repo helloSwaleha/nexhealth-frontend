@@ -10,7 +10,7 @@ import {
   LogOut
 } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
-import API_BASE_URL from '../apiConfig';
+import API_BASE_URL from '../../../apiConfig';
 
 
 export default function AdminSidebar() {

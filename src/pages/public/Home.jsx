@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search, MapPin, Calendar, ShieldCheck, Clock, Loader2, AlertCircle } from "lucide-react";
-import API_BASE_URL from '../apiConfig';
+import API_BASE_URL from '../../apiConfig';
 import "../../CSS/Home.css";
 
 import image1 from "../../img/image1.jpg";

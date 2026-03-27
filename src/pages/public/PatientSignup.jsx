@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import API_BASE_URL from '../apiConfig';
+import API_BASE_URL from '../../apiConfig';
 import { 
   User, Mail, Lock, Phone, MapPin, Hash, 
   UserPlus, Loader2, ShieldCheck, CheckCircle2, X,

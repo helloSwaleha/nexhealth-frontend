@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import AdminSidebar from "./AdminSidebar";
 import axios from "axios";
-import API_BASE_URL from '../apiConfig';
+import API_BASE_URL from '../../../apiConfig';
 
 export default function AdminPatientDetails() {
   // 🔹 Match the key in your Route path: /admin/patients/:patientId

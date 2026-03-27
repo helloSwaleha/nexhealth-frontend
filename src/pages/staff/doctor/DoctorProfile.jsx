@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import DoctorSidebar from "./DoctorSidebar";
 import axios from "axios";
 import { Loader2, User, Phone, Mail, Award, DollarSign, Building, Save, AlertCircle } from "lucide-react";
-import API_BASE_URL from '../apiConfig';
+import API_BASE_URL from '../../../apiConfig';
 
 export default function DoctorProfile() {
   const token = localStorage.getItem("token");

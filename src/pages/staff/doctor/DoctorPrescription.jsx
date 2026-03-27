@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import DoctorSidebar from "./DoctorSidebar";
 import axios from "axios";
-import API_BASE_URL from '../apiConfig';
+import API_BASE_URL from '../../../apiConfig';
 import { 
   Loader2, Search, History, User, Calendar, 
   ChevronRight, Pill, Clipboard, AlertCircle 

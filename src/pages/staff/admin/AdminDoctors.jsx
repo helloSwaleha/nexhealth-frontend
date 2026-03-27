@@ -3,7 +3,7 @@ import AdminSidebar from "./AdminSidebar";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { User, Activity, MoreVertical, ExternalLink, Search, X } from "lucide-react";
-import API_BASE_URL from '../apiConfig';
+import API_BASE_URL from '../../../apiConfig';
 
 export default function AdminDoctors() {
   const navigate = useNavigate();

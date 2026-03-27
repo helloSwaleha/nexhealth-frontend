@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import AdminSidebar from "./AdminSidebar";
 import axios from "axios";
 import { UserPlus, Stethoscope, Mail, Lock, Phone, Banknote, Building2, GraduationCap } from "lucide-react";
-import API_BASE_URL from '../apiConfig';
+import API_BASE_URL from '../../../apiConfig';
 
 
 export default function AdminAddDoctor() {

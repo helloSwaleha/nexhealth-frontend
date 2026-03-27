@@ -11,7 +11,7 @@ import {
   AlertCircle
 } from "lucide-react";
 import AdminSidebar from "./AdminSidebar";
-import API_BASE_URL from '../apiConfig';
+import API_BASE_URL from '../../../apiConfig';
 
 
 export default function AdminPrescriptions() {

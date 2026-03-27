@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import AdminSidebar from "./AdminSidebar";
 import axios from "axios";
 import { Plus, Eye, Power, MapPin, Building2, Search, CheckCircle, XCircle } from "lucide-react";
-import API_BASE_URL from '../apiConfig';
+import API_BASE_URL from '../../../apiConfig';
 
 export default function AdminClinics() {
   const navigate = useNavigate();

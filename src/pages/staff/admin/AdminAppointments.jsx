@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import AdminSidebar from "./AdminSidebar";
 import axios from "axios";
 import { Calendar, XCircle, Clock, User, Stethoscope, Building2 } from "lucide-react";
-import API_BASE_URL from '../apiConfig';
+import API_BASE_URL from '../../../apiConfig';
 
 export default function AdminAppointments() {
   const token = localStorage.getItem("token");

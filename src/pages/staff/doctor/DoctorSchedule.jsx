@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import DoctorSidebar from "./DoctorSidebar";
 import axios from "axios";
 import { Loader2, Calendar, Clock, CheckCircle, Timer, AlertCircle, User } from "lucide-react";
-import API_BASE_URL from '../apiConfig';
+import API_BASE_URL from '../../../apiConfig';
 
 export default function DoctorSchedule() {
   const doctorId = localStorage.getItem("userId");

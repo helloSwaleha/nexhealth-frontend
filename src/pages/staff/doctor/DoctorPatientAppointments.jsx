@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import DoctorSidebar from "./DoctorSidebar";
 import axios from "axios";
 import { Loader2, Calendar, Clock, MapPin } from "lucide-react";
-import API_BASE_URL from '../apiConfig';
+import API_BASE_URL from '../../../apiConfig';
 
 export default function DoctorPatientAppointments() {
   const { patientId } = useParams();

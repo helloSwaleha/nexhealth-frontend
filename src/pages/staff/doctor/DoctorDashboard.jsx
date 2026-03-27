@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import DoctorSidebar from "./DoctorSidebar";
 import { Calendar, ClipboardList, FileText, Users, Clock } from "lucide-react";
 import axios from "axios";
-import API_BASE_URL from '../apiConfig';
+import API_BASE_URL from '../../../apiConfig';
 
 export default function DoctorDashboard() {
   // ✅ Check for doctorId specifically, fallback to userId

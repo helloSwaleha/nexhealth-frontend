@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Mail, Lock, Loader2, ArrowRight, ShieldCheck, HeartPulse, X } from "lucide-react";
-import API_BASE_URL from '../apiConfig';
+import API_BASE_URL from '../../apiConfig';
 
 export default function PatientLogin() {
   const [email, setEmail] = useState("");

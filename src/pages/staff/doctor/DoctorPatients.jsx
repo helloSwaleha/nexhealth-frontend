@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 // Added 'History' to the imports below
 import { User, Calendar, FileText, Search, Loader2, Phone, Mail, UserCheck, History } from "lucide-react";
-import API_BASE_URL from '../apiConfig';
+import API_BASE_URL from '../../../apiConfig';
 
 
 export default function DoctorPatients() {
