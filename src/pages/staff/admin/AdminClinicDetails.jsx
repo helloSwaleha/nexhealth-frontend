@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Activity, Users, CheckCircle, XCircle, ArrowLeft } from "lucide-react";
+import API_BASE_URL from '../apiConfig';
 
 export default function AdminClinicDetails() {
   const { clinicId } = useParams();
@@ -22,8 +23,8 @@ export default function AdminClinicDetails() {
     try {
       setLoading(true);
       const [clinicRes, doctorsRes] = await Promise.all([
-        axios.get(`http://localhost:8080/admin/clinics/${clinicId}`, axiosConfig),
-        axios.get(`http://localhost:8080/admin/clinics/${clinicId}/doctors`, axiosConfig)
+        axios.get(`${API_BASE_URL}/admin/clinics/${clinicId}`, axiosConfig),
+        axios.get(`${API_BASE_URL}/admin/clinics/${clinicId}/doctors`, axiosConfig)
       ]);
 
       setClinic(clinicRes.data);
@@ -48,7 +49,7 @@ export default function AdminClinicDetails() {
     try {
       // 2. FIXED: Added the ?status= query parameter to match backend requirements
       await axios.put(
-        `http://localhost:8080/admin/doctors/${doctor.id}/status?status=${newStatus}`,
+        `${API_BASE_URL}/admin/doctors/${doctor.id}/status?status=${newStatus}`,
         {},
         axiosConfig
       );
@@ -82,7 +83,7 @@ export default function AdminClinicDetails() {
         {/* FIXED: Image URL logic to handle backend image paths */}
         <img
           src={clinic.imagePath 
-            ? `http://localhost:8080/${clinic.imagePath}` 
+            ? `${API_BASE_URL}/${clinic.imagePath}` 
             : (clinic.imageUrl || "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=300")}
           alt="Clinic"
           className="rounded-2xl w-40 h-40 object-cover border-4 border-gray-50 shadow-md"

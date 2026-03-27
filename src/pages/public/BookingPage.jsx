@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Calendar, Clock, User, CheckCircle, Loader2, ChevronLeft } from "lucide-react";
+import API_BASE_URL from '../apiConfig';
 
 export default function BookingPage() {
   const { clinicId, doctorId } = useParams();
@@ -24,7 +25,7 @@ export default function BookingPage() {
       try {
         setLoading(true);
         // ✅ Matches your singular @RequestMapping("/doctor")
-        const res = await axios.get(`http://localhost:8080/doctor/${doctorId}`, {
+        const res = await axios.get(`${API_BASE_URL}/doctor/${doctorId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setDoctor(res.data);
@@ -63,7 +64,7 @@ export default function BookingPage() {
     };
 
     try {
-      await axios.post("http://localhost:8080/api/patient-appointments/book", bookingData, {
+      await axios.post("${API_BASE_URL}/api/patient-appointments/book", bookingData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       

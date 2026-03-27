@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import API_BASE_URL from '../apiConfig';
 
 export default function Prescriptions() {
   const [prescriptions, setPrescriptions] = useState([]);
@@ -14,7 +15,7 @@ export default function Prescriptions() {
       try {
         // Updated URL to match your standard API structure
         const res = await axios.get(
-          `http://localhost:8080/api/patient/prescriptions`,
+          `${API_BASE_URL}/api/patient/prescriptions`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -38,7 +39,7 @@ export default function Prescriptions() {
   const downloadPrescription = async (id) => {
     try {
       const res = await axios.get(
-        `http://localhost:8080/api/patient/prescriptions/${id}/download`,
+        `${API_BASE_URL}/api/patient/prescriptions/${id}/download`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

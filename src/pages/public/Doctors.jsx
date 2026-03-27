@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { MapPin, Star, Stethoscope, Search, X, AlertCircle, ChevronLeft } from "lucide-react";
+import API_BASE_URL from '../apiConfig';
 
 export default function Doctors() {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ export default function Doctors() {
       try {
         setLoading(true);
         // Ensure this endpoint returns the 'status' field for each clinic
-        const res = await axios.get("http://localhost:8080/api/clinics");
+        const res = await axios.get("${API_BASE_URL}/api/clinics");
         setClinics(res.data);
       } catch (err) {
         console.error("Error fetching clinics:", err);
@@ -123,7 +124,7 @@ export default function Doctors() {
                 {/* Image Section */}
                 <div className="relative h-52 overflow-hidden bg-gray-200">
                   <img
-                    src={clinic.imagePath ? `http://localhost:8080/${clinic.imagePath}` : (clinic.imageUrl || "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1000")}
+                    src={clinic.imagePath ? `${API_BASE_URL}/${clinic.imagePath}` : (clinic.imageUrl || "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1000")}
                     alt={clinic.clinicName}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1000"; }}

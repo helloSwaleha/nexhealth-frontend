@@ -3,6 +3,7 @@ import DoctorSidebar from "./DoctorSidebar";
 import { CheckCircle, XCircle, FileText, Loader2, Calendar, Send, X, Clock, Search } from "lucide-react"; // Added Search icon
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import API_BASE_URL from '../apiConfig';
 
 export default function DoctorAppointments() {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ export default function DoctorAppointments() {
 
   const fetchAppointments = () => {
     axios
-      .get("http://localhost:8080/appointments/doctor", axiosConfig)
+      .get("${API_BASE_URL}/appointments/doctor", axiosConfig)
       .then((res) => {
         const rawData = res.data || [];
         const sortedData = [...rawData].sort((a, b) => {
@@ -80,7 +81,7 @@ export default function DoctorAppointments() {
 
     try {
       setActionLoading(aId);
-      await axios.post(`http://localhost:8080/api/doctor/prescriptions`, prescriptionPayload, axiosConfig);
+      await axios.post(`${API_BASE_URL}/api/doctor/prescriptions`, prescriptionPayload, axiosConfig);
       setAppointments((prev) =>
         prev.map((appt) =>
           (appt.id === aId || appt.appointmentId === aId) 
@@ -101,7 +102,7 @@ export default function DoctorAppointments() {
     if (!window.confirm("Mark this appointment as CANCELLED?")) return;
     try {
       setActionLoading(appointmentId);
-      await axios.put(`http://localhost:8080/appointments/${appointmentId}/doctor-cancel`, {}, axiosConfig);
+      await axios.put(`${API_BASE_URL}/appointments/${appointmentId}/doctor-cancel`, {}, axiosConfig);
       fetchAppointments();
     } catch (error) {
       alert("Cancellation failed.");

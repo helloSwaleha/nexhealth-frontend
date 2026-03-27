@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import AdminSidebar from "./AdminSidebar";
 import axios from "axios";
 import { Calendar, XCircle, Clock, User, Stethoscope, Building2 } from "lucide-react";
+import API_BASE_URL from '../apiConfig';
 
 export default function AdminAppointments() {
   const token = localStorage.getItem("token");
@@ -18,7 +19,7 @@ export default function AdminAppointments() {
   const fetchAppointments = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8080/appointments/admin/all",
+        "${API_BASE_URL}/appointments/admin/all",
         axiosConfig
       );
       setAppointments(res.data);
@@ -40,7 +41,7 @@ export default function AdminAppointments() {
 
     try {
       await axios.put(
-        `http://localhost:8080/appointments/admin/cancel/${appointmentId}`,
+        `${API_BASE_URL}/appointments/admin/cancel/${appointmentId}`,
         {}, // Body is empty
         axiosConfig
       );

@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import DoctorSidebar from "./DoctorSidebar";
 import axios from "axios";
 import { Loader2, Calendar, Clock, MapPin } from "lucide-react";
+import API_BASE_URL from '../apiConfig';
 
 export default function DoctorPatientAppointments() {
   const { patientId } = useParams();
@@ -27,7 +28,7 @@ export default function DoctorPatientAppointments() {
 
     // Fetching data from your backend: @GetMapping("/patient/{patientId}")
     axios
-      .get(`http://localhost:8080/appointments/patient/${patientId}`, axiosConfig)
+      .get(`${API_BASE_URL}/appointments/patient/${patientId}`, axiosConfig)
       .then((res) => {
         setAppointments(res.data || []);
       })

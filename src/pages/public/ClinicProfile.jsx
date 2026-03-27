@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import API_BASE_URL from '../apiConfig';
 import { 
   MapPin, 
   Clock, 
@@ -37,8 +38,8 @@ export default function ClinicProfile() {
 
         // 1. Fetch Clinic Details and Doctors in parallel
         const [clinicRes, doctorsRes] = await Promise.all([
-          axios.get(`http://localhost:8080/api/clinics/${id}`, config),
-          axios.get(`http://localhost:8080/api/doctors/clinic/${id}`, config)
+          axios.get(`${API_BASE_URL}/api/clinics/${id}`, config),
+          axios.get(`${API_BASE_URL}/api/doctors/clinic/${id}`, config)
         ]);
 
         // 2. CHECK CLINIC STATUS: If clinic itself is inactive, show error
@@ -109,7 +110,7 @@ export default function ClinicProfile() {
             {/* Image Section */}
             <div className="w-full md:w-1/3 lg:w-1/4 aspect-square rounded-[3rem] overflow-hidden shadow-2xl border-[12px] border-slate-50 relative group">
               <img
-                src={clinic.imagePath ? `http://localhost:8080/${clinic.imagePath}` : (clinic.imageUrl || "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1000")}
+                src={clinic.imagePath ? `${API_BASE_URL}/${clinic.imagePath}` : (clinic.imageUrl || "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1000")}
                 alt={clinic.clinicName}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1000" }}
@@ -183,7 +184,7 @@ export default function ClinicProfile() {
                     <div className="w-full h-full rounded-[1.8rem] overflow-hidden bg-white flex items-center justify-center text-slate-300">
                         {doctor.imagePath ? (
                             <img 
-                              src={`http://localhost:8080/${doctor.imagePath}`} 
+                              src={`${API_BASE_URL}/${doctor.imagePath}`} 
                               alt={doctor.name} 
                               className="w-full h-full object-cover" 
                               onError={(e) => { e.target.src = "https://via.placeholder.com/150?text=Doctor"; }}

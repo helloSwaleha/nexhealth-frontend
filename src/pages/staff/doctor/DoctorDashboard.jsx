@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import DoctorSidebar from "./DoctorSidebar";
 import { Calendar, ClipboardList, FileText, Users, Clock } from "lucide-react";
 import axios from "axios";
+import API_BASE_URL from '../apiConfig';
 
 export default function DoctorDashboard() {
   // ✅ Check for doctorId specifically, fallback to userId
@@ -42,11 +43,11 @@ export default function DoctorDashboard() {
           pendingRes,
           recentRes,
         ] = await Promise.all([
-          axios.get(`http://localhost:8080/api/doctor/appointments/${doctorId}/today/count`, axiosConfig),
-          axios.get(`http://localhost:8080/api/doctor/patients/${doctorId}/count`, axiosConfig),
-          axios.get(`http://localhost:8080/api/doctor/prescriptions/${doctorId}/count`, axiosConfig),
-          axios.get(`http://localhost:8080/api/doctor/appointments/${doctorId}/pending/count`, axiosConfig),
-          axios.get(`http://localhost:8080/api/doctor/appointments/${doctorId}/recent`, axiosConfig),
+          axios.get(`${API_BASE_URL}/api/doctor/appointments/${doctorId}/today/count`, axiosConfig),
+          axios.get(`${API_BASE_URL}/api/doctor/patients/${doctorId}/count`, axiosConfig),
+          axios.get(`${API_BASE_URL}/api/doctor/prescriptions/${doctorId}/count`, axiosConfig),
+          axios.get(`${API_BASE_URL}/api/doctor/appointments/${doctorId}/pending/count`, axiosConfig),
+          axios.get(`${API_BASE_URL}/api/doctor/appointments/${doctorId}/recent`, axiosConfig),
         ]);
 
         setStats({

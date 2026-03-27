@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import API_BASE_URL from '../apiConfig';
 
 function DoctorLogin() {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ function DoctorLogin() {
 
     try {
       // ✅ URL updated to match your auth structure
-      const response = await axios.post("http://localhost:8080/auth/login", {
+      const response = await axios.post("${API_BASE_URL}/auth/login", {
         email,
         password,
       });

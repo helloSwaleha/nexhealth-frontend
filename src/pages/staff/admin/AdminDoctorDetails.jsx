@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import AdminSidebar from "./AdminSidebar";
 import axios from "axios";
+import API_BASE_URL from '../apiConfig';
 import { 
   ArrowLeft, 
   Mail, 
@@ -32,7 +33,7 @@ export default function AdminDoctorDetails() {
   const fetchDoctorDetails = useCallback(async () => {
     try {
       setLoading(true);
-      const res = await axios.get(`http://localhost:8080/admin/doctors/${doctorId}`, axiosConfig);
+      const res = await axios.get(`${API_BASE_URL}/admin/doctors/${doctorId}`, axiosConfig);
       console.log("Doctor Data Received:", res.data); // Helpful for checking clinic field names
       setDoctor(res.data);
       setError(null);
@@ -67,7 +68,7 @@ export default function AdminDoctorDetails() {
     if (window.confirm(confirmMsg)) {
       try {
         await axios.put(
-          `http://localhost:8080/admin/doctors/${doctor.id}/status?status=${newStatus}`,
+          `${API_BASE_URL}/admin/doctors/${doctor.id}/status?status=${newStatus}`,
           {}, 
           axiosConfig
         );

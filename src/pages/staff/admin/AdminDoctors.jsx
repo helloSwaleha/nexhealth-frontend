@@ -3,6 +3,7 @@ import AdminSidebar from "./AdminSidebar";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { User, Activity, MoreVertical, ExternalLink, Search, X } from "lucide-react";
+import API_BASE_URL from '../apiConfig';
 
 export default function AdminDoctors() {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ export default function AdminDoctors() {
     }
 
     axios
-      .get("http://localhost:8080/admin/doctors", axiosConfig)
+      .get("${API_BASE_URL}/admin/doctors", axiosConfig)
       .then((res) => {
         setDoctors(res.data);
       })
@@ -51,7 +52,7 @@ export default function AdminDoctors() {
 
     axios
       .put(
-        `http://localhost:8080/admin/doctors/${doctor.id}/status?status=${newStatus}`,
+        `${API_BASE_URL}/admin/doctors/${doctor.id}/status?status=${newStatus}`,
         {}, 
         axiosConfig
       )

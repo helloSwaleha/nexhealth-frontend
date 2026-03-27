@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search, MapPin, Calendar, ShieldCheck, Clock, Loader2, AlertCircle } from "lucide-react";
+import API_BASE_URL from '../apiConfig';
 import "../../CSS/Home.css";
 
 import image1 from "../../img/image1.jpg";
 import image2 from "../../img/image2.jpg";
+
 
 export default function Home() {
   const navigate = useNavigate();
@@ -18,7 +20,7 @@ export default function Home() {
   useEffect(() => {
     const fetchClinics = async () => {
       try {
-        const res = await fetch("http://localhost:8080/api/clinics");
+        const res = await fetch("${API_BASE_URL}/api/clinics");
         if (!res.ok) throw new Error("Could not fetch clinics data.");
         const data = await res.json();
         setClinics(data);
@@ -128,7 +130,7 @@ export default function Home() {
                     <div className="clinic-img-container">
                       <img 
                         src={clinic.imagePath 
-                          ? `http://localhost:8080/${clinic.imagePath}` 
+                          ? `${API_BASE_URL}/${clinic.imagePath}` 
                           : (clinic.imageUrl || "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=600")} 
                         alt={clinic.clinicName || clinic.name} 
                         onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=600" }}

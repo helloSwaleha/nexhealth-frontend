@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 // Added 'History' to the imports below
 import { User, Calendar, FileText, Search, Loader2, Phone, Mail, UserCheck, History } from "lucide-react";
+import API_BASE_URL from '../apiConfig';
+
 
 export default function DoctorPatients() {
   const navigate = useNavigate();
@@ -31,7 +33,7 @@ export default function DoctorPatients() {
         setLoading(true);
         // Targets only this doctor's specific patients
         const res = await axios.get(
-          `http://localhost:8080/doctor/${doctorId}/patients`, 
+          `${API_BASE_URL}/doctor/${doctorId}/patients`, 
           axiosConfig()
         );
         setPatients(res.data || []);

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import DoctorSidebar from "./DoctorSidebar";
 import axios from "axios";
 import { Loader2, Calendar, Clock, CheckCircle, Timer, AlertCircle, User } from "lucide-react";
+import API_BASE_URL from '../apiConfig';
 
 export default function DoctorSchedule() {
   const doctorId = localStorage.getItem("userId");
@@ -27,7 +28,7 @@ export default function DoctorSchedule() {
         setLoading(true);
         // FIX: Added /api prefix to match your Spring Boot controller mapping
         const res = await axios.get(
-          `http://localhost:8080/doctor/${doctorId}/schedule`,
+          `${API_BASE_URL}/doctor/${doctorId}/schedule`,
           axiosConfig()
         );
         

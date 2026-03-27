@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import API_BASE_URL from '../apiConfig';
 
 export default function AdminLogin() {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ export default function AdminLogin() {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:8080/auth/login", formData);
+      const res = await axios.post("${API_BASE_URL}/auth/login", formData);
 
       // Save JWT + user info
       localStorage.setItem("token", res.data.token);

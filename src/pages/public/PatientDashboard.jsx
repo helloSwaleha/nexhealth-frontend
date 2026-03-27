@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, Navigate } from "react-router-dom";
 import { Calendar, FileText, User, Loader2, ChevronRight, Bell } from "lucide-react";
 import axios from "axios";
+import API_BASE_URL from '../apiConfig';
 
 export default function PatientDashboard() {
   const navigate = useNavigate();
@@ -27,10 +28,10 @@ export default function PatientDashboard() {
       try {
         const headers = { Authorization: `Bearer ${token}` };
 
-        const fetchAppt = axios.get(`http://localhost:8080/appointments/patient/${id}/upcoming`, { headers })
+        const fetchAppt = axios.get(`${API_BASE_URL}/appointments/patient/${id}/upcoming`, { headers })
           .catch(() => ({ data: [] }));
 
-        const fetchScripts = axios.get(`http://localhost:8080/api/patient/prescriptions/${id}`, { headers })
+        const fetchScripts = axios.get(`${API_BASE_URL}/api/patient/prescriptions/${id}`, { headers })
           .catch(() => ({ data: [] }));
 
         const [appointmentRes, prescriptionRes] = await Promise.all([fetchAppt, fetchScripts]);

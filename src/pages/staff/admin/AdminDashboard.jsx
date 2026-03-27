@@ -9,6 +9,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import axios from "axios";
+import API_BASE_URL from '../apiConfig';
 
 export default function AdminDashboard() {
   const token = localStorage.getItem("token");
@@ -46,13 +47,13 @@ export default function AdminDashboard() {
           recentClinicsRes,
           recentApptRes,
         ] = await Promise.all([
-          axios.get("http://localhost:8080/admin/clinics/count", axiosConfig),
-          axios.get("http://localhost:8080/admin/doctors/count", axiosConfig),
-          axios.get("http://localhost:8080/admin/patients/count", axiosConfig),
-          axios.get("http://localhost:8080/admin/appointments/today/count", axiosConfig),
-          axios.get("http://localhost:8080/admin/doctors/recent", axiosConfig),
-          axios.get("http://localhost:8080/admin/clinics/recent", axiosConfig),
-          axios.get("http://localhost:8080/admin/appointments/recent", axiosConfig),
+          axios.get("${API_BASE_URL}/admin/clinics/count", axiosConfig),
+          axios.get("${API_BASE_URL}/admin/doctors/count", axiosConfig),
+          axios.get("${API_BASE_URL}/admin/patients/count", axiosConfig),
+          axios.get("${API_BASE_URL}/admin/appointments/today/count", axiosConfig),
+          axios.get("${API_BASE_URL}/admin/doctors/recent", axiosConfig),
+          axios.get("${API_BASE_URL}/admin/clinics/recent", axiosConfig),
+          axios.get("${API_BASE_URL}/admin/appointments/recent", axiosConfig),
         ]);
 
         setStats({

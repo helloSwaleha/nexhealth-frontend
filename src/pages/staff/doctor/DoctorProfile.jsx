@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import DoctorSidebar from "./DoctorSidebar";
 import axios from "axios";
 import { Loader2, User, Phone, Mail, Award, DollarSign, Building, Save, AlertCircle } from "lucide-react";
+import API_BASE_URL from '../apiConfig';
 
 export default function DoctorProfile() {
   const token = localStorage.getItem("token");
@@ -37,7 +38,7 @@ export default function DoctorProfile() {
 
       try {
         const res = await axios.get(
-          "http://localhost:8080/doctor/profile",
+          "${API_BASE_URL}/doctor/profile",
           axiosConfig()
         );
         
@@ -73,7 +74,7 @@ export default function DoctorProfile() {
     setError("");
     try {
       await axios.put(
-        "http://localhost:8080/doctor/profile",
+        "${API_BASE_URL}/doctor/profile",
         profile,
         axiosConfig()
       );

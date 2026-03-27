@@ -5,6 +5,8 @@ import {
   CheckCircle2, FileText, ChevronDown, ChevronUp
 } from "lucide-react";
 import axios from "axios";
+import API_BASE_URL from '../apiConfig';
+
 
 export default function Appointments() {
   const [appointments, setAppointments] = useState([]);
@@ -28,7 +30,7 @@ export default function Appointments() {
     try {
       // 1. Fetch Appointments
       const apptRes = await axios.get(
-        `http://localhost:8080/appointments/patient/${patientId}`,
+        `${API_BASE_URL}/appointments/patient/${patientId}`,
         authHeader
       );
       const appts = apptRes.data;
@@ -39,7 +41,7 @@ export default function Appointments() {
       
       // Run all requests in parallel for maximum speed
       const prescriptionPromises = completedAppts.map(appt => 
-        axios.get(`http://localhost:8080/api/doctor/prescriptions/appointment/${appt.id}`, authHeader)
+        axios.get(`${API_BASE_URL}/api/doctor/prescriptions/appointment/${appt.id}`, authHeader)
           .then(res => ({ id: appt.id, data: res.data }))
           .catch(() => null) // Ignore errors for individual missing prescriptions
       );

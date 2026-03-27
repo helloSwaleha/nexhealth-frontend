@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminSidebar from "./AdminSidebar";
 import axios from "axios";
+import API_BASE_URL from '../apiConfig';
 import { 
   TrendingUp, 
   CheckCircle, 
@@ -57,10 +58,10 @@ export default function AdminReports() {
       try {
         // Parallel API calls for speed
         const [summaryRes, trendRes, clinicRes, behaviorRes] = await Promise.all([
-          axios.get("http://localhost:8080/admin/reports/summary", axiosConfig),
-          axios.get("http://localhost:8080/admin/reports/appointments/weekly", axiosConfig),
-          axios.get("http://localhost:8080/admin/reports/clinics/performance", axiosConfig),
-          axios.get("http://localhost:8080/admin/reports/patient-behavior", axiosConfig),
+          axios.get("${API_BASE_URL}/admin/reports/summary", axiosConfig),
+          axios.get("${API_BASE_URL}/admin/reports/appointments/weekly", axiosConfig),
+          axios.get("${API_BASE_URL}/admin/reports/clinics/performance", axiosConfig),
+          axios.get("${API_BASE_URL}/admin/reports/patient-behavior", axiosConfig),
         ]);
 
         setSummary(summaryRes.data || summary);

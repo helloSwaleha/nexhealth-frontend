@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AdminSidebar from "./AdminSidebar";
 import { PlusCircle, Image as ImageIcon, Layout, MapPin, Phone, Mail, Upload, Link as LinkIcon } from "lucide-react";
+import API_BASE_URL from '../apiConfig';
+
+
 
 export default function AdminAddClinic() {
   const navigate = useNavigate();
@@ -49,7 +52,7 @@ export default function AdminAddClinic() {
 
     try {
       await axios.post(
-        "http://localhost:8080/admin/clinics",
+        "${API_BASE_URL}/admin/clinics",
         clinic,
         {
           headers: {

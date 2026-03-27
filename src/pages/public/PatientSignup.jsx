@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import API_BASE_URL from '../apiConfig';
 import { 
   User, Mail, Lock, Phone, MapPin, Hash, 
   UserPlus, Loader2, ShieldCheck, CheckCircle2, X,
@@ -36,7 +37,7 @@ export default function PatientSignup() {
     setIsSubmitting(true);
 
     try {
-      const response = await axios.post("http://localhost:8080/api/patient/signup", formData);
+      const response = await axios.post("${API_BASE_URL}/api/patient/signup", formData);
       if (response.status === 200 || response.status === 201) {
         navigate("/patient/login");
       }

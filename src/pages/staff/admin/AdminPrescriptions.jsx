@@ -11,6 +11,8 @@ import {
   AlertCircle
 } from "lucide-react";
 import AdminSidebar from "./AdminSidebar";
+import API_BASE_URL from '../apiConfig';
+
 
 export default function AdminPrescriptions() {
   const [prescriptions, setPrescriptions] = useState([]);
@@ -22,7 +24,7 @@ export default function AdminPrescriptions() {
   const fetchPrescriptions = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:8080/admin/prescriptions", {
+      const res = await axios.get("${API_BASE_URL}/admin/prescriptions", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setPrescriptions(res.data);
@@ -40,7 +42,7 @@ export default function AdminPrescriptions() {
   // Handle PDF View/Download
   const viewPdf = async (id) => {
     try {
-      const response = await axios.get(`http://localhost:8080/admin/prescriptions/${id}/pdf`, {
+      const response = await axios.get(`${API_BASE_URL}/admin/prescriptions/${id}/pdf`, {
         headers: { Authorization: `Bearer ${token}` },
         responseType: "blob", // Important for binary data
       });

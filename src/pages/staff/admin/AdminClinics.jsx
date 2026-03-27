@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import AdminSidebar from "./AdminSidebar";
 import axios from "axios";
 import { Plus, Eye, Power, MapPin, Building2, Search, CheckCircle, XCircle } from "lucide-react";
+import API_BASE_URL from '../apiConfig';
 
 export default function AdminClinics() {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ export default function AdminClinics() {
     try {
       setLoading(true);
       const res = await axios.get(
-        "http://localhost:8080/admin/clinics",
+        "${API_BASE_URL}/admin/clinics",
         axiosConfig
       );
       setClinics(res.data);
@@ -56,9 +57,9 @@ export default function AdminClinics() {
     }
 
     try {
-      // Backend Call: PUT http://localhost:8080/admin/clinics/{id}/status?status=ACTIVE/INACTIVE
+      // Backend Call: PUT ${API_BASE_URL}/admin/clinics/{id}/status?status=ACTIVE/INACTIVE
       await axios.put(
-        `http://localhost:8080/admin/clinics/${clinic.id}/status?status=${newStatus}`,
+        `${API_BASE_URL}/admin/clinics/${clinic.id}/status?status=${newStatus}`,
         {},
         axiosConfig
       );

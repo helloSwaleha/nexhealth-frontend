@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import DoctorSidebar from "./DoctorSidebar";
 import axios from "axios";
+import API_BASE_URL from '../apiConfig';
 import { 
   Loader2, Search, History, User, Calendar, 
   ChevronRight, Pill, Clipboard, AlertCircle 
@@ -23,7 +24,7 @@ export default function PatientHistoryList() {
     const fetchPatients = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("http://localhost:8080/api/doctor/patients", axiosConfig());
+        const res = await axios.get("${API_BASE_URL}/api/doctor/patients", axiosConfig());
         setPatients(res.data || []);
       } catch (err) {
         console.error("Failed to fetch patients", err);
@@ -39,7 +40,7 @@ export default function PatientHistoryList() {
     try {
       setHistoryLoading(true);
       const res = await axios.get(
-        `http://localhost:8080/api/doctor/prescriptions/patient/${patient.id}`, 
+        `${API_BASE_URL}/api/doctor/prescriptions/patient/${patient.id}`, 
         axiosConfig()
       );
       setSelectedPatientHistory(res.data || []);

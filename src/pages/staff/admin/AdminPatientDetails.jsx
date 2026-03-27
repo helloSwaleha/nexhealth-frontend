@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import AdminSidebar from "./AdminSidebar";
 import axios from "axios";
+import API_BASE_URL from '../apiConfig';
 
 export default function AdminPatientDetails() {
   // 🔹 Match the key in your Route path: /admin/patients/:patientId
@@ -23,9 +24,9 @@ export default function AdminPatientDetails() {
     try {
       // 🔹 Ensure these endpoints exist in your AdminController
       const [patientRes, statsRes, apptRes] = await Promise.all([
-        axios.get(`http://localhost:8080/admin/patients/${patientId}`, axiosConfig),
-        axios.get(`http://localhost:8080/admin/patients/${patientId}/stats`, axiosConfig),
-        axios.get(`http://localhost:8080/admin/patients/${patientId}/appointments`, axiosConfig),
+        axios.get(`${API_BASE_URL}/admin/patients/${patientId}`, axiosConfig),
+        axios.get(`${API_BASE_URL}/admin/patients/${patientId}/stats`, axiosConfig),
+        axios.get(`${API_BASE_URL}/admin/patients/${patientId}/appointments`, axiosConfig),
       ]);
 
       setPatient(patientRes.data);

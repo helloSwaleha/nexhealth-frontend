@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import API_BASE_URL from '../apiConfig';
 
 export default function PatientProfile() {
   const [patient, setPatient] = useState(null);
@@ -34,7 +35,7 @@ export default function PatientProfile() {
 
   const fetchProfile = async () => {
     try {
-      const res = await axios.get(`http://localhost:8080/api/patients/${patientId}`, config);
+      const res = await axios.get(`${API_BASE_URL}/api/patients/${patientId}`, config);
       setPatient(res.data);
       setFormData(res.data);
     } catch (err) {
@@ -48,7 +49,7 @@ export default function PatientProfile() {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put(`http://localhost:8080/api/patients/${patientId}`, formData, config);
+      const res = await axios.put(`${API_BASE_URL}/api/patients/${patientId}`, formData, config);
       setPatient(res.data); // Update main state with fresh DB data
       setIsEditing(false);
       setMessage({ type: "success", text: "Medical profile synchronized successfully!" });
