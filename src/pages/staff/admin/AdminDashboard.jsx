@@ -47,13 +47,13 @@ export default function AdminDashboard() {
           recentClinicsRes,
           recentApptRes,
         ] = await Promise.all([
-          axios.get("${API_BASE_URL}/admin/clinics/count", axiosConfig),
-          axios.get("${API_BASE_URL}/admin/doctors/count", axiosConfig),
-          axios.get("${API_BASE_URL}/admin/patients/count", axiosConfig),
-          axios.get("${API_BASE_URL}/admin/appointments/today/count", axiosConfig),
-          axios.get("${API_BASE_URL}/admin/doctors/recent", axiosConfig),
-          axios.get("${API_BASE_URL}/admin/clinics/recent", axiosConfig),
-          axios.get("${API_BASE_URL}/admin/appointments/recent", axiosConfig),
+          axios.get(`${API_BASE_URL}/admin/clinics/count`, axiosConfig),
+          axios.get(`${API_BASE_URL}/admin/doctors/count`, axiosConfig),
+          axios.get(`${API_BASE_URL}/admin/patients/count`, axiosConfig),
+          axios.get(`${API_BASE_URL}/admin/appointments/today/count`, axiosConfig),
+          axios.get(`${API_BASE_URL}/admin/doctors/recent`, axiosConfig),
+          axios.get(`${API_BASE_URL}/admin/clinics/recent`, axiosConfig),
+          axios.get(`${API_BASE_URL}/admin/appointments/recent`, axiosConfig),
         ]);
 
         setStats({
