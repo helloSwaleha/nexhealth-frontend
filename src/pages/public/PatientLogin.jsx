@@ -18,7 +18,7 @@ export default function PatientLogin() {
 
     try {
       const res = await axios.post(
-        "${API_BASE_URL}/api/patient/login",
+        `${API_BASE_URL}/api/patient/login`,
         { email, password }
       );
 
