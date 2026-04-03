@@ -41,7 +41,7 @@ export default function AdminAddDoctor() {
     }
 
     axios
-      .get("${API_BASE_URL}/admin/clinics", axiosConfig)
+      .get(`${API_BASE_URL}/admin/clinics`, axiosConfig)
       .then((res) => setClinics(res.data))
       .catch((err) => {
         console.error("Fetch clinics error:", err);
@@ -71,7 +71,7 @@ export default function AdminAddDoctor() {
     };
 
     axios
-      .post("${API_BASE_URL}/admin/doctors/add", payload, axiosConfig)
+      .post(`${API_BASE_URL}/admin/doctors/add`, payload, axiosConfig)
       .then(() => {
         alert("Doctor registered successfully!");
         navigate("/admin/doctors");
