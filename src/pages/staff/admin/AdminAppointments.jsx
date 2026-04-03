@@ -19,7 +19,7 @@ export default function AdminAppointments() {
   const fetchAppointments = async () => {
     try {
       const res = await axios.get(
-        "${API_BASE_URL}/appointments/admin/all",
+        `${API_BASE_URL}/appointments/admin/all`,
         axiosConfig
       );
       setAppointments(res.data);
