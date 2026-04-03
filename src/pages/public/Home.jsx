@@ -20,7 +20,7 @@ export default function Home() {
   useEffect(() => {
     const fetchClinics = async () => {
       try {
-        const res = await fetch("${API_BASE_URL}/api/clinics");
+        const res = await fetch(`${API_BASE_URL}/api/clinics`);
         if (!res.ok) throw new Error("Could not fetch clinics data.");
         const data = await res.json();
         setClinics(data);
