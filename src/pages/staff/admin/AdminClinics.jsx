@@ -28,7 +28,7 @@ export default function AdminClinics() {
     try {
       setLoading(true);
       const res = await axios.get(
-        "${API_BASE_URL}/admin/clinics",
+        `${API_BASE_URL}/admin/clinics`,
         axiosConfig
       );
       setClinics(res.data);
@@ -51,7 +51,7 @@ export default function AdminClinics() {
     // Confirmation for deactivation
     if (!isActivating) {
       const confirmDeactivate = window.confirm(
-        `Are you sure you want to deactivate "${clinic.name}"? This clinic will be hidden from all patients immediately.`
+        `Are you sure you want to deactivate `${clinic.name}`? This clinic will be hidden from all patients immediately.`
       );
       if (!confirmDeactivate) return;
     }
