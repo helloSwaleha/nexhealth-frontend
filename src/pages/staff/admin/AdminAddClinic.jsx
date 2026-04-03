@@ -52,7 +52,7 @@ export default function AdminAddClinic() {
 
     try {
       await axios.post(
-        "${API_BASE_URL}/admin/clinics",
+        `${API_BASE_URL}/admin/clinics`,
         clinic,
         {
           headers: {
