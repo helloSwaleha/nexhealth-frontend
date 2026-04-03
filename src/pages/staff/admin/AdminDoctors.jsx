@@ -26,7 +26,7 @@ export default function AdminDoctors() {
     }
 
     axios
-      .get("${API_BASE_URL}/admin/doctors", axiosConfig)
+      .get(`${API_BASE_URL}/admin/doctors`, axiosConfig)
       .then((res) => {
         setDoctors(res.data);
       })
