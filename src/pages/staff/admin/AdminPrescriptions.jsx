@@ -24,7 +24,7 @@ export default function AdminPrescriptions() {
   const fetchPrescriptions = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("${API_BASE_URL}/admin/prescriptions", {
+      const res = await axios.get(`${API_BASE_URL}/admin/prescriptions1, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setPrescriptions(res.data);
