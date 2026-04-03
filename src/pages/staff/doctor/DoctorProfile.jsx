@@ -38,7 +38,7 @@ export default function DoctorProfile() {
 
       try {
         const res = await axios.get(
-          "${API_BASE_URL}/doctor/profile",
+          `${API_BASE_URL}/doctor/profile`,
           axiosConfig()
         );
         
@@ -74,7 +74,7 @@ export default function DoctorProfile() {
     setError("");
     try {
       await axios.put(
-        "${API_BASE_URL}/doctor/profile",
+        `${API_BASE_URL}/doctor/profile`,
         profile,
         axiosConfig()
       );
