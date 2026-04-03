@@ -20,7 +20,7 @@ export default function AdminLogin() {
 
     try {
       // 🔹 Pointing to your unified auth endpoint
-      const res = await axios.post("${API_BASE_URL}/auth/login", formData);
+      const res = await axios.post(`${API_BASE_URL}/auth/login`, formData);
       const { token, role, userId } = res.data;
 
       // ✅ 1. Normalize Role
@@ -42,9 +42,9 @@ export default function AdminLogin() {
 
       // ✅ 3. Redirect based on cleaned role
       if (cleanRole === "ADMIN") {
-        navigate("/admin/dashboard");
+        navigate(`/admin/dashboard`);
       } else if (cleanRole === "DOCTOR") {
-        navigate("/doctor/dashboard");
+        navigate(`/doctor/dashboard`);
       }
 
     } catch (err) {
