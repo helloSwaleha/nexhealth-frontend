@@ -24,7 +24,7 @@ export default function PatientHistoryList() {
     const fetchPatients = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("${API_BASE_URL}/api/doctor/patients", axiosConfig());
+        const res = await axios.get(`${API_BASE_URL}/api/doctor/patients`, axiosConfig());
         setPatients(res.data || []);
       } catch (err) {
         console.error("Failed to fetch patients", err);
