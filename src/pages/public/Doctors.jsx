@@ -20,7 +20,7 @@ export default function Doctors() {
       try {
         setLoading(true);
         // Ensure this endpoint returns the 'status' field for each clinic
-        const res = await axios.get("${API_BASE_URL}/api/clinics");
+        const res = await axios.get(`${API_BASE_URL}/api/clinics`);
         setClinics(res.data);
       } catch (err) {
         console.error("Error fetching clinics:", err);
