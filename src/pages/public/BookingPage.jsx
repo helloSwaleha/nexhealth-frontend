@@ -64,7 +64,7 @@ export default function BookingPage() {
     };
 
     try {
-      await axios.post("${API_BASE_URL}/api/patient-appointments/book", bookingData, {
+      await axios.post(`${API_BASE_URL}/api/patient-appointments/book`, bookingData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
