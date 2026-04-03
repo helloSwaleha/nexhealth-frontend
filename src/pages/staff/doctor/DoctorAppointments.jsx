@@ -36,7 +36,7 @@ export default function DoctorAppointments() {
 
   const fetchAppointments = () => {
     axios
-      .get("${API_BASE_URL}/appointments/doctor", axiosConfig)
+      .get(`{API_BASE_URL}/appointments/doctor`, axiosConfig)
       .then((res) => {
         const rawData = res.data || [];
         const sortedData = [...rawData].sort((a, b) => {
