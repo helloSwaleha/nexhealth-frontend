@@ -25,7 +25,7 @@ export default function BookingPage() {
       try {
         setLoading(true);
         // ✅ Matches your singular @RequestMapping("/doctor")
-        const res = await axios.get(`${API_BASE_URL}/doctor/${doctorId}`, {
+        const res = await axios.get(`${API_BASE_URL}/api/doctors/${doctorId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setDoctor(res.data);
