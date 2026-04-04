@@ -111,7 +111,7 @@ export default function PatientDashboard() {
                     </div>
                     <div>
                       <p className="text-xl font-black text-slate-900">
-                        Dr. {appointment.doctorName || "Consultant"}
+                         {appointment.doctorName || "Consultant"}
                       </p>
                       <p className="text-blue-600 font-bold text-[10px] uppercase tracking-widest">
                         {appointment.clinicName || "Medical Center"}
