@@ -436,7 +436,7 @@
 }
 
 /* --- Mobile Fixes --- */
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   /* Fix the Promo Section (The blue area in your screenshot) */
   .promo-section {
     height: auto; /* Allow it to grow with content */
