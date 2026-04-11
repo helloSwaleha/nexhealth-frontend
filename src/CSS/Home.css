@@ -440,7 +440,7 @@
   /* Fix the Promo Section (The blue area in your screenshot) */
   .promo-section {
     height: auto; /* Allow it to grow with content */
-    padding: 60px 0;
+    
   }
 
   .promo-content h2 {
@@ -450,14 +450,14 @@
 
   .promo-steps {
     flex-direction: column;
-    gap: 40px;
-    margin-top: 40px;
+    gap: 30px;
+    margin-top: 30px;
   }
 
   /* Fix the Footer Grid */
   .footer-v2 {
-    padding: 60px 0 30px;
-    text-align: center; /* Center text for better mobile aesthetic */
+    padding: 20px 0 30px;
+     /* Center text for better mobile aesthetic */
   }
 
   .footer-grid {
