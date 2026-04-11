@@ -28,19 +28,20 @@ export default function ClinicProfile() {
 
   useEffect(() => {
     const fetchClinicData = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        
-        const config = {
-          headers: { Authorization: `Bearer ${token}` },
-        };
+  try {
+    setLoading(true);
+    setError(null);
+    
+    // Create config ONLY if token exists
+    const config = token 
+      ? { headers: { Authorization: `Bearer ${token}` } } 
+      : {}; // Empty object for guest users
 
-        // 1. Fetch Clinic Details and Doctors in parallel
-        const [clinicRes, doctorsRes] = await Promise.all([
-          axios.get(`${API_BASE_URL}/api/clinics/${id}`, config),
-          axios.get(`${API_BASE_URL}/api/doctors/clinic/${id}`, config)
-        ]);
+    // 1. Fetch Clinic Details and Doctors in parallel
+    const [clinicRes, doctorsRes] = await Promise.all([
+      axios.get(`${API_BASE_URL}/api/clinics/${id}`, config),
+      axios.get(`${API_BASE_URL}/api/doctors/clinic/${id}`, config)
+    ]);
 
         // 2. CHECK CLINIC STATUS: If clinic itself is inactive, show error
         if (clinicRes.data.status !== "ACTIVE") {
