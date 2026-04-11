@@ -434,3 +434,58 @@
     gap: 40px;
   }
 }
+
+/* --- Mobile Fixes --- */
+@media (max-width: 600px) {
+  /* Fix the Promo Section (The blue area in your screenshot) */
+  .promo-section {
+    height: auto; /* Allow it to grow with content */
+    padding: 60px 0;
+  }
+
+  .promo-content h2 {
+    font-size: 1.8rem; /* Smaller text for mobile */
+    padding: 0 10px;
+  }
+
+  .promo-steps {
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 40px;
+  }
+
+  /* Fix the Footer Grid */
+  .footer-v2 {
+    padding: 60px 0 30px;
+    text-align: center; /* Center text for better mobile aesthetic */
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr; /* Stack everything */
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+
+  /* Center the newsletter input group */
+  .input-group {
+    flex-direction: column; /* Stack input and button */
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .input-group input {
+    border-radius: 8px; /* Round all corners since it's stacked */
+    text-align: center;
+  }
+
+  .input-group button {
+    padding: 12px;
+    border-radius: 8px;
+  }
+
+  /* Ensure links are easy to tap */
+  .footer-links li {
+    padding: 8px 0;
+  }
+}
