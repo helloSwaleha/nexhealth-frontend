@@ -3,7 +3,7 @@ import { useNavigate, useParams, Navigate } from "react-router-dom";
 import { Calendar, FileText, User, Loader2, ChevronRight, Bell, Menu, ClipboardList } from "lucide-react";
 import axios from "axios";
 import API_BASE_URL from '../../apiConfig';
-
+import PatientSidebar from "./PatientSidebar";
 
 export default function PatientDashboard() {
   const navigate = useNavigate();
