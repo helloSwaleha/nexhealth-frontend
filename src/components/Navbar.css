@@ -1,4 +1,4 @@
-/* Base Styles */
+/* --- Base Styles --- */
 .navbar {
   position: fixed;
   top: 0;
@@ -16,7 +16,7 @@
 
 .nav-scrolled {
   padding: 12px 0;
-  background: rgba(255, 255, 255, 0.477);
+  background: rgba(255, 255, 255, 0.85); /* Slightly more opaque for readability */
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
@@ -25,11 +25,12 @@
 
 /* Change text color based on scroll */
 .nav-scrolled .logo-text, 
-.nav-scrolled .nav-links a {
+.nav-scrolled .nav-links a,
+.nav-scrolled .nav-links .nav-text {
   color: #1e293b;
 }
 
-/* Logo Styling - Unique Type */
+/* Logo Styling */
 .nav-logo a {
   display: flex;
   align-items: center;
@@ -47,13 +48,14 @@
   justify-content: center;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  flex-shrink: 0;
 }
 
 .logo-text {
   font-size: 24px;
   font-weight: 800;
   letter-spacing: -1px;
-  color: #110303; /* Default for transparent nav */
+  color: #000000;
 }
 
 .text-highlight {
@@ -74,7 +76,7 @@
 
 /* Nav Container */
 .nav-container {
-  width: 90%;
+  width: 92%;
   max-width: 1200px;
   margin: auto;
   display: flex;
@@ -85,12 +87,14 @@
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 30px;
+  gap: 25px;
   align-items: center;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-links a {
-  color: #4eb8d3;
+  color: #1e293b;
   text-decoration: none;
   font-weight: 600;
   font-size: 15px;
@@ -100,23 +104,28 @@
   gap: 8px;
 }
 
-/* Dynamic Hover Effect */
 .nav-links a:hover {
   color: #3b82f6 !important;
 }
 
-/* Buttons */
+/* --- Buttons --- */
 .signup-btn {
   background: #3b82f6;
   color: white !important;
   padding: 10px 22px !important;
   border-radius: 12px;
   box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+  white-space: nowrap; /* CRITICAL: Fixes the floating text issue */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
 }
 
 .signup-btn:hover {
   background: #2563eb;
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
 }
 
 .logout-glass-btn {
@@ -131,6 +140,7 @@
   align-items: center;
   gap: 8px;
   transition: 0.3s;
+  white-space: nowrap;
 }
 
 .logout-glass-btn:hover {
@@ -138,9 +148,55 @@
   color: white;
 }
 
-/* Responsive */
+/* --- PERFECT RESPONSIVE FIXES --- */
 @media (max-width: 768px) {
-  .nav-links span { display: none; }
-  .nav-links { gap: 15px; }
-  .logo-text { font-size: 20px; }
+  .nav-container {
+    width: 95%;
+  }
+
+  .nav-links {
+    gap: 12px; /* Tight gap to keep items on one line */
+  }
+
+  .logo-text {
+    font-size: 18px;
+  }
+
+  /* Hide the text label but keep the icon for links */
+  .nav-text {
+    display: none;
+  }
+
+  .signup-btn {
+    padding: 8px 14px !important;
+    font-size: 12px !important;
+    border-radius: 10px;
+    flex-shrink: 0; /* Prevents button from squishing */
+  }
+
+  .logout-glass-btn {
+    padding: 8px 10px;
+    flex-shrink: 0;
+  }
+
+  .nav-links a {
+    gap: 4px;
+    font-size: 18px; /* Slightly larger icon for touch targets */
+  }
+}
+
+/* Handling extremely narrow screens (e.g., Samsung Galaxy Fold / Small screens) */
+@media (max-width: 380px) {
+  .nav-links {
+    gap: 8px;
+  }
+  
+  .logo-text {
+    display: none; /* Only show icon on very small screens to fit everything */
+  }
+
+  .signup-btn {
+    padding: 7px 10px !important;
+    font-size: 11px !important;
+  }
 }
