@@ -3,13 +3,13 @@ import { useNavigate, useParams, Navigate } from "react-router-dom";
 import { Calendar, FileText, User, Loader2, ChevronRight, Bell, Menu, ClipboardList } from "lucide-react";
 import axios from "axios";
 import API_BASE_URL from '../../apiConfig';
-import PatientSidebar from "./PatientSidebar"; // Import your fixed sidebar
+import PatientSidebar from "./PatientSidebar"; 
 
 export default function PatientDashboard() {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  // Sidebar State
+  // Sidebar State for Mobile
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const userIdFromStorage = localStorage.getItem("userId"); 
@@ -81,16 +81,14 @@ export default function PatientDashboard() {
 
   return (
     <div className="flex min-h-screen bg-slate-50">
-      {/* 1. Integrated Sidebar */}
+      {/* 1. Sidebar with mobile state */}
       <PatientSidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
 
-      {/* Main Content Area */}
       <main className="flex-1 flex flex-col h-screen overflow-y-auto">
         
-        {/* 2. Responsive Header with Hamburger Menu */}
+        {/* 2. Header with Hamburger Menu for Mobile */}
         <header className="bg-white border-b border-slate-100 px-6 py-4 md:px-8 md:py-6 flex justify-between items-center sticky top-0 z-30">
           <div className="flex items-center gap-3">
-            {/* Mobile Menu Trigger */}
             <button 
               onClick={() => setIsSidebarOpen(true)}
               className="md:hidden p-2 text-slate-600 bg-slate-50 rounded-lg"
@@ -108,7 +106,6 @@ export default function PatientDashboard() {
           </div>
         </header>
 
-        {/* Dashboard Content */}
         <div className="p-6 md:p-8 lg:p-12 max-w-7xl mx-auto w-full">
           <div className="mb-8 md:mb-10">
             <h2 className="text-3xl md:text-4xl font-black text-slate-900 leading-tight">Welcome Back 👋</h2>
@@ -126,7 +123,8 @@ export default function PatientDashboard() {
                 <div className="bg-white border border-slate-200 rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-8 shadow-sm hover:shadow-xl hover:shadow-blue-900/5 transition-all">
                   <div className="flex items-center gap-4 mb-6 md:mb-8">
                     <div className="h-12 w-12 md:h-14 md:w-14 bg-blue-50 rounded-xl md:rounded-2xl flex items-center justify-center text-blue-600">
-                      <Calendar size={24} md:size={28} />
+                      {/* FIXED: No namespace tags here */}
+                      <Calendar className="w-6 h-6 md:w-7 md:h-7" />
                     </div>
                     <div>
                       <p className="text-lg md:text-xl font-black text-slate-900 leading-tight">
