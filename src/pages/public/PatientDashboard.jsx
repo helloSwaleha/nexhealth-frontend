@@ -80,13 +80,16 @@ export default function PatientDashboard() {
   }
 
   return (
-    <div className="flex min-h-screen bg-slate-50">
-      {/* 1. Sidebar with mobile state */}
-      <PatientSidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+    <div className="flex min-h-screen bg-slate-50 overflow-hidden">
+      {/* 1. SIDEBAR: Fixed responsive logic to prevent "doubling" */}
+      <div className="hidden md:block">
+         <PatientSidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+      </div>
 
+      {/* 2. MAIN CONTENT AREA */}
       <main className="flex-1 flex flex-col h-screen overflow-y-auto">
         
-        {/* 2. Header with Hamburger Menu for Mobile */}
+        {/* Responsive Header */}
         <header className="bg-white border-b border-slate-100 px-6 py-4 md:px-8 md:py-6 flex justify-between items-center sticky top-0 z-30">
           <div className="flex items-center gap-3">
             <button 
@@ -106,6 +109,7 @@ export default function PatientDashboard() {
           </div>
         </header>
 
+        {/* Dashboard Grid */}
         <div className="p-6 md:p-8 lg:p-12 max-w-7xl mx-auto w-full">
           <div className="mb-8 md:mb-10">
             <h2 className="text-3xl md:text-4xl font-black text-slate-900 leading-tight">Welcome Back 👋</h2>
@@ -113,7 +117,6 @@ export default function PatientDashboard() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
-            {/* UPCOMING APPOINTMENT */}
             <section className="space-y-4">
               <h3 className="font-black text-[10px] uppercase tracking-widest text-slate-400 flex items-center gap-2">
                 <div className="h-1 w-3 bg-blue-600 rounded-full"></div> Most Recent Upcoming
@@ -123,7 +126,6 @@ export default function PatientDashboard() {
                 <div className="bg-white border border-slate-200 rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-8 shadow-sm hover:shadow-xl hover:shadow-blue-900/5 transition-all">
                   <div className="flex items-center gap-4 mb-6 md:mb-8">
                     <div className="h-12 w-12 md:h-14 md:w-14 bg-blue-50 rounded-xl md:rounded-2xl flex items-center justify-center text-blue-600">
-                      {/* FIXED: No namespace tags here */}
                       <Calendar className="w-6 h-6 md:w-7 md:h-7" />
                     </div>
                     <div>
@@ -162,7 +164,6 @@ export default function PatientDashboard() {
               )}
             </section>
 
-            {/* MEDICAL RECORDS */}
             <section className="space-y-4">
               <h3 className="font-black text-[10px] uppercase tracking-widest text-slate-400 flex items-center gap-2">
                 <div className="h-1 w-3 bg-emerald-500 rounded-full"></div> Recent Prescriptions
