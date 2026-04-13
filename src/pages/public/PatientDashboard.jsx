@@ -1,4 +1,3 @@
-patient dashboard 
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, Navigate } from "react-router-dom";
 import { Calendar, FileText, User, Loader2, ChevronRight, Bell } from "lucide-react";
