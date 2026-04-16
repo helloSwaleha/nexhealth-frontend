@@ -11,6 +11,7 @@ import Home from "./pages/public/Home";
 import Doctors from "./pages/public/Doctors";
 import ClinicProfile from "./pages/public/ClinicProfile";
 import About from "./pages/public/About";
+import PrivacyPolicy from "./pages/public/PrivacyPolicy";
 
 /* Patient Pages */
 import PatientLogin from "./pages/public/PatientLogin";
@@ -88,6 +89,7 @@ export default function App() {
           <Route path="/patient/signup" element={<PatientSignup />} />
           <Route path="/staff/login" element={<StaffLogin />} />
           <Route path="/about" element={<About />} />
+           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route 
             path="/book/:clinicId/:doctorId" 
             element={<PatientProtected><BookingPage /></PatientProtected>} 
