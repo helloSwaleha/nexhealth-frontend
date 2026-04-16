@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Heart, Users, Award, ShieldCheck, CheckCircle2 } from "lucide-react";
 
 const stats = [
@@ -9,6 +10,7 @@ const stats = [
 ];
 
 export default function About() {
+  const navigate = useNavigate();
   return (
     <div className="bg-white">
       {/* --- Hero Section --- */}
@@ -86,7 +88,7 @@ export default function About() {
               ))}
             </ul>
 
-            <button className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-blue-600 transition-all shadow-lg shadow-slate-200">
+            <button className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-blue-600 transition-all shadow-lg shadow-slate-200" onClick={() => navigate("/doctors")}>
               Meet Our Specialists
             </button>
           </div>
