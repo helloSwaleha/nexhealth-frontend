@@ -186,7 +186,7 @@ export default function Home() {
             <ul>
               <li onClick={() => navigate("/about")} className="cursor-pointer hover:text-blue-400 transition-colors">About Us</li>
               <li onClick={() => navigate("/doctors")} className="cursor-pointer hover:text-blue-400 transition-colors">Our Clinics</li>
-              <li className="cursor-pointer hover:text-blue-400 transition-colors">Privacy Policy</li>
+              <li onClick={() => navigate("/privacy-policy")} className="cursor-pointer hover:text-blue-400 transition-colors">Privacy Policy</li>
             </ul>
           </div>
           <div className="footer-newsletter">
