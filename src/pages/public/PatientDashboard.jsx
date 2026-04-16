@@ -8,19 +8,21 @@ export default function PatientDashboard() {
   const navigate = useNavigate();
   const { id } = useParams();
   
-  // ✅ USE THIS: This connects to the setIsOpen state in your PatientLayout
-  const { setIsOpen } = useOutletContext();
+  // ✅ Pulls the sidebar toggle function from PatientLayout context
+  const { setIsOpen } = useOutletContext(); 
+
+  // Auth & Data State
+  const userIdFromStorage = localStorage.getItem("userId"); 
+  const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
 
   const [appointment, setAppointment] = useState(null);
   const [prescriptions, setPrescriptions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [authorized, setAuthorized] = useState(true);
 
-  const userIdFromStorage = localStorage.getItem("userId"); 
-  const token = localStorage.getItem("token");
-  const role = localStorage.getItem("role");
-
   useEffect(() => {
+    // Security Check
     if (!token || role?.toUpperCase() !== "PATIENT" || userIdFromStorage != id) {
       setAuthorized(false);
       setLoading(false);
@@ -30,15 +32,35 @@ export default function PatientDashboard() {
     const fetchDashboardData = async () => {
       try {
         const headers = { Authorization: `Bearer ${token}` };
-        const [appointmentRes, prescriptionRes] = await Promise.all([
-          axios.get(`${API_BASE_URL}/appointments/patient/${id}/upcoming`, { headers }).catch(() => ({ data: [] })),
-          axios.get(`${API_BASE_URL}/api/patient/prescriptions/${id}`, { headers }).catch(() => ({ data: [] }))
-        ]);
+
+        const fetchAppt = axios.get(`${API_BASE_URL}/appointments/patient/${id}/upcoming`, { headers })
+          .catch(() => ({ data: [] }));
+
+        const fetchScripts = axios.get(`${API_BASE_URL}/api/patient/prescriptions/${id}`, { headers })
+          .catch(() => ({ data: [] }));
+
+        const [appointmentRes, prescriptionRes] = await Promise.all([fetchAppt, fetchScripts]);
+
+        // --- SORTING LOGIC FOR "MOST UPCOMING" ---
+        let apptData = appointmentRes.data;
         
-        setAppointment(appointmentRes.data[0] || null);
+        if (Array.isArray(apptData) && apptData.length > 0) {
+          const sorted = [...apptData].sort((a, b) => {
+            const dateA = new Date(`${a.date || a.appointmentDate}T${a.time || a.appointmentTime || '00:00'}`);
+            const dateB = new Date(`${b.date || b.appointmentDate}T${b.time || b.appointmentTime || '00:00'}`);
+            return dateA - dateB;
+          });
+          setAppointment(sorted[0]); 
+        } else if (apptData && !Array.isArray(apptData) && apptData.id) {
+          setAppointment(apptData);
+        } else {
+          setAppointment(null);
+        }
+
         setPrescriptions(Array.isArray(prescriptionRes.data) ? prescriptionRes.data : []);
+
       } catch (error) {
-        console.error("Dashboard Fetch Error:", error);
+        console.error("Critical Dashboard Error:", error);
       } finally {
         setLoading(false);
       }
@@ -51,21 +73,22 @@ export default function PatientDashboard() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-white">
-        <Loader2 className="animate-spin text-blue-600" size={40} />
+      <div className="flex flex-col items-center justify-center min-h-screen bg-white">
+        <Loader2 className="animate-spin text-blue-600 mb-4" size={40} />
+        <p className="text-slate-400 font-bold uppercase text-[10px] tracking-widest">Verifying Records...</p>
       </div>
     );
   }
 
   return (
     <main className="flex-1 flex flex-col h-screen overflow-y-auto bg-slate-50">
-      {/* ✅ UPDATED HEADER: Includes the Mobile Menu Toggle */}
+      {/* --- HEADER --- */}
       <header className="bg-white border-b border-slate-100 px-6 py-4 md:px-8 md:py-6 flex justify-between items-center sticky top-0 z-20">
         <div className="flex items-center gap-4">
-          {/* MOBILE MENU BUTTON: Only shows on small screens */}
+          {/* ✅ MOBILE MENU TOGGLE: Visible only on small screens */}
           <button 
             onClick={() => setIsOpen(true)}
-            className="md:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
+            className="md:hidden p-2 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors"
           >
             <Menu size={24} />
           </button>
@@ -82,62 +105,94 @@ export default function PatientDashboard() {
         </div>
       </header>
 
-      {/* Main Content Area */}
+      {/* --- DASHBOARD CONTENT --- */}
       <div className="p-6 md:p-12 max-w-7xl mx-auto w-full">
         <div className="mb-10">
-          <h2 className="text-4xl font-black text-slate-900">Welcome Back 👋</h2>
-          <p className="text-slate-500 font-medium mt-2">Showing your primary care overview.</p>
+          <h2 className="text-4xl font-black text-slate-900 leading-none">Welcome Back 👋</h2>
+          <p className="text-slate-500 font-medium mt-3">Showing your primary care overview.</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Appointment Card */}
+          
+          {/* APPOINTMENT CARD */}
           <section className="space-y-4">
-            <h3 className="font-black text-[10px] uppercase tracking-widest text-blue-600">Most Recent Upcoming</h3>
-            <div className="bg-white border border-slate-200 rounded-[2.5rem] p-8 shadow-sm">
-              {appointment ? (
-                <div className="space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div className="h-12 w-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600">
-                      <Calendar size={24} />
-                    </div>
-                    <div>
-                      <p className="font-black text-slate-900">{appointment.doctorName}</p>
-                      <p className="text-slate-500 text-sm font-bold">{appointment.clinicName}</p>
-                    </div>
+            <h3 className="font-black text-[10px] uppercase tracking-widest text-slate-400 flex items-center gap-2">
+              <div className="h-1 w-3 bg-blue-600 rounded-full"></div> Most Recent Upcoming
+            </h3>
+            
+            {appointment ? (
+              <div className="bg-white border border-slate-200 rounded-[2rem] p-8 shadow-sm hover:shadow-xl hover:shadow-blue-900/5 transition-all">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="h-14 w-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600">
+                    <Calendar size={28} />
+                  </div>
+                  <div>
+                    <p className="text-xl font-black text-slate-900">
+                       {appointment.doctorName || "Consultant"}
+                    </p>
+                    <p className="text-blue-600 font-bold text-[10px] uppercase tracking-widest">
+                      {appointment.clinicName || "Medical Center"}
+                    </p>
                   </div>
                 </div>
-              ) : (
-                <div className="py-12 text-center border-2 border-dashed border-slate-100 rounded-[2rem]">
-                  <p className="text-slate-400 font-bold mb-4">No scheduled visits found.</p>
-                  <button onClick={() => navigate("/doctors")} className="text-blue-600 font-black text-[10px] uppercase tracking-widest">
-                    Book Appointment
-                  </button>
+
+                <div className="grid grid-cols-2 gap-4 mb-8">
+                  <div className="p-5 bg-slate-50 rounded-2xl border border-slate-100">
+                    <span className="text-[9px] text-slate-400 font-black uppercase tracking-widest">Date</span>
+                    <p className="font-bold text-slate-800 text-lg">{appointment.date}</p>
+                  </div>
+                  <div className="p-5 bg-slate-50 rounded-2xl border border-slate-100">
+                    <span className="text-[9px] text-slate-400 font-black uppercase tracking-widest">Time</span>
+                    <p className="font-bold text-slate-800 text-lg">{appointment.time}</p>
+                  </div>
                 </div>
-              )}
-            </div>
+
+                <button 
+                  onClick={() => navigate("/patient/appointments")}
+                  className="w-full bg-slate-900 text-white py-5 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-blue-600 transition-all shadow-lg shadow-slate-200"
+                >
+                  View All Appointments
+                </button>
+              </div>
+            ) : (
+              <div className="bg-white border-2 border-dashed border-slate-200 rounded-[2rem] p-12 text-center">
+                <p className="text-slate-400 font-bold mb-4">No scheduled visits found.</p>
+                <button onClick={() => navigate("/doctors")} className="text-blue-600 font-black text-[10px] uppercase tracking-widest">Book Appointment</button>
+              </div>
+            )}
           </section>
 
-          {/* Prescriptions Card */}
+          {/* PRESCRIPTIONS CARD */}
           <section className="space-y-4">
-            <h3 className="font-black text-[10px] uppercase tracking-widest text-emerald-600">Recent Prescriptions</h3>
-            <div className="bg-white border border-slate-200 rounded-[2.5rem] p-8 shadow-sm">
+            <h3 className="font-black text-[10px] uppercase tracking-widest text-slate-400 flex items-center gap-2">
+              <div className="h-1 w-3 bg-emerald-500 rounded-full"></div> Recent Prescriptions
+            </h3>
+            <div className="bg-white border border-slate-200 rounded-[2rem] p-8 shadow-sm">
               {prescriptions.length > 0 ? (
-                prescriptions.map((p) => (
-                  <div key={p.id} className="flex items-center justify-between p-4 hover:bg-slate-50 rounded-2xl transition-all">
-                    <div className="flex items-center gap-4">
-                      <FileText className="text-emerald-500" size={20} />
-                      <p className="font-bold text-slate-800">{p.medicineName}</p>
+                <div className="space-y-2">
+                  {prescriptions.slice(0, 3).map((p) => (
+                    <div key={p.id} className="flex items-center justify-between p-4 hover:bg-slate-50 rounded-2xl transition-all border border-transparent hover:border-slate-100 group">
+                      <div className="flex items-center gap-4">
+                        <div className="h-10 w-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-white transition-all">
+                           <FileText size={18} />
+                        </div>
+                        <div>
+                          <p className="font-bold text-slate-800 text-sm">{p.medicineName}</p>
+                          <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">{p.dosage}</p>
+                        </div>
+                      </div>
+                      <ChevronRight size={16} className="text-slate-300" />
                     </div>
-                    <ChevronRight size={16} className="text-slate-300" />
-                  </div>
-                ))
+                  ))}
+                </div>
               ) : (
-                <div className="py-12 text-center">
-                  <p className="text-slate-300 font-bold">No records available.</p>
+                <div className="text-center py-10">
+                   <p className="text-slate-300 font-bold text-sm">No records available.</p>
                 </div>
               )}
             </div>
           </section>
+          
         </div>
       </div>
     </main>
