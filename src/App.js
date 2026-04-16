@@ -10,6 +10,7 @@ import PatientLayout from "./pages/public/PatientLayout";
 import Home from "./pages/public/Home";
 import Doctors from "./pages/public/Doctors";
 import ClinicProfile from "./pages/public/ClinicProfile";
+import About from "./pages/public/About";
 
 /* Patient Pages */
 import PatientLogin from "./pages/public/PatientLogin";
@@ -86,6 +87,7 @@ export default function App() {
           <Route path="/patient/login" element={<PatientLogin />} />
           <Route path="/patient/signup" element={<PatientSignup />} />
           <Route path="/staff/login" element={<StaffLogin />} />
+          <Route path="/about" element={<About />} />
           <Route 
             path="/book/:clinicId/:doctorId" 
             element={<PatientProtected><BookingPage /></PatientProtected>} 
