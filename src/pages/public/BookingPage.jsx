@@ -24,7 +24,6 @@ export default function BookingPage() {
       
       try {
         setLoading(true);
-        // ✅ Matches your singular @RequestMapping("/doctor")
         const res = await axios.get(`${API_BASE_URL}/doctor/${doctorId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
@@ -41,10 +40,9 @@ export default function BookingPage() {
 
   /**
    * ✅ Helper: Converts "02:00 PM" to "14:00:00" 
-   * Required for Java LocalTime compatibility
    */
   const convertTo24Hour = (time12h) => {
-    if (!time12h) return "";
+    if (!time12h || !time12h.includes(" ")) return "";
     const [time, modifier] = time12h.split(" ");
     let [hours, minutes] = time.split(":");
     if (hours === "12") hours = "00";
@@ -56,29 +54,44 @@ export default function BookingPage() {
     e.preventDefault();
     setSubmitting(true);
 
+    // ✅ Ensure IDs are sent as Numbers to match Java Long types
     const bookingData = {
-      patientId: patientId,
-      doctorId: doctorId,
+      patientId: Number(patientId),
+      doctorId: Number(doctorId),
       appointmentDate: bookingDate, 
       appointmentTime: convertTo24Hour(bookingTime), 
     };
 
     try {
       await axios.post(`${API_BASE_URL}/api/patient-appointments/book`, bookingData, {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { 
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
       });
       
       setSuccess(true);
       setTimeout(() => navigate(`/patient/dashboard/${patientId}`), 2000);
     } catch (err) {
-      console.error("Booking Error:", err.response?.data || err.message);
-      alert(err.response?.data || "Booking failed. Please try again.");
+      // ✅ FIX: Extract the actual error string to avoid [object Object]
+      console.error("Booking Error Full Response:", err.response);
+      
+      const errorMessage = err.response?.data?.message || 
+                           err.response?.data || 
+                           err.message || 
+                           "Booking failed. Please try again.";
+      
+      // If it's a 403, give a more helpful security hint
+      if (err.response?.status === 403) {
+        alert("Permission Denied (403): Please ensure you are logged in as a Patient.");
+      } else {
+        alert(errorMessage);
+      }
     } finally {
       setSubmitting(false);
     }
   };
 
-  // ✅ Show loading spinner while fetching doctor info
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50">
